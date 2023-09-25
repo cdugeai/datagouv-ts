@@ -1,6 +1,6 @@
-# datagouv
+# datagouv-ts
 
-![https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white]()
+![https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white](https://www.npmjs.com/package/datagouv-ts)
 
 Utilitaire pour la publication de données sur datagouv (data.gouv.fr).
 

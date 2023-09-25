@@ -1,7 +1,7 @@
 {
-  "name": "datagouv",
+  "name": "datagouv-ts",
   "version": "1.0.0",
-  "description": "Utilitaire pour la publication de données sur datagouv (data.gouv.fr).",
+  "description": "Utilitaire Typescript pour la publication de données sur datagouv (data.gouv.fr).",
   "main": "dist/Datagouv.js",
   "types": "dist/Datagouv.d.ts",
   "scripts": {
