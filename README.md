@@ -13,3 +13,18 @@ Cet outil permet de:
 
 Des types ont également été créés pour manipuler simplement les objets *datagouv*:
 - `DatagouvResourceCustom` représente une resource datagouv
+
+## Usage
+
+Dans un fichier Typescript:
+
+```ts
+import {DatagouvResourceCustom, Datagouv} from "datagouv-ts";
+
+async function main(){
+    const resourceCreated: DatagouvResourceCustom = await Datagouv.createResourceFromFile(...);
+    console.log("Resource just created: "+resourceCreated.title)
+}
+
+main();
+```
