@@ -1,0 +1,31 @@
+{
+  "name": "datagouv-cli-tmp",
+  "version": "1.0.0",
+  "description": "Interface en ligne de commande (CLI) pour la publication de données sur datagouv (data.gouv.fr).",
+  "main": "dist/Datagouv.js",
+  "types": "dist/Datagouv.d.ts",
+  "scripts": {
+    "prepublish": "tsc",
+    "start": "npx tsc && node dist/Datagouv.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.0",
+    "commander": "^11.0.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.50.0",
+    "form-data": "^4.0.0",
+    "fs.promises": "^0.1.2",
+    "ora": "^5.4.0",
+    "typescript": "^5.2.2",
+    "yaml": "^2.3.2"
+  },
+  "devDependencies": {
+    "@inquirer/prompts": "^3.1.1",
+    "@types/current-git-branch": "^1.1.4",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^20.6.0"
+  }
+}
