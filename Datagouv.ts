@@ -2,9 +2,6 @@ import { createReadStream, statSync } from 'fs';
 //var FormData = require('form-data');
 import FormData from 'form-data';
 import axios from 'axios';
-import { Spinner } from 'ora';
-import { assert, log } from 'console';
-const ora = require('ora')
 
 
 export class Datagouv {
