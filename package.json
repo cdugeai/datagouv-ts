@@ -1,7 +1,7 @@
 {
-  "name": "datagouv-cli-tmp",
+  "name": "datagouv",
   "version": "1.0.0",
-  "description": "Interface en ligne de commande (CLI) pour la publication de données sur datagouv (data.gouv.fr).",
+  "description": "Utilitaire pour la publication de données sur datagouv (data.gouv.fr).",
   "main": "dist/Datagouv.js",
   "types": "dist/Datagouv.d.ts",
   "scripts": {

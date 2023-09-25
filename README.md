@@ -1,6 +1,8 @@
-# datagouv-cli
+# datagouv
 
-Interface en ligne de commande (CLI) pour la publication de données sur datagouv (data.gouv.fr).
+![https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white]()
+
+Utilitaire pour la publication de données sur datagouv (data.gouv.fr).
 
 Cet outil permet de:
 - `getDatasetMetadata`: obtenir les métadonnées d'un jeu de données
