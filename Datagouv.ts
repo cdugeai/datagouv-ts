@@ -1,10 +1,16 @@
 import { createReadStream, statSync } from 'fs';
-//var FormData = require('form-data');
 import FormData from 'form-data';
 import axios from 'axios';
 
 
 export class Datagouv {
+
+    /**
+     * Get metadata of given dataset
+     * @param baseUrl Base url of datagouv instance
+     * @param datasetId Id of dataset to inspect
+     * @returns Metdata of dataset as object
+     */
     static getDatasetMetadata(baseUrl: string, datasetId: string|undefined) {
         return axios({
             url: [baseUrl, 'datasets', datasetId].join('/'),
@@ -14,8 +20,17 @@ export class Datagouv {
     }
 
 
-
-    static createResourceRemote(baseUrl: string, datasetId: string, title:string, description:string, url:string, datagouv_apiKey: string) {
+    /**
+     * Create resource remote. The resource will be linked to a file hosted publicly.
+     * @param baseUrl Base url of datagouv instance
+     * @param datasetId Id of dataset to inspect
+     * @param title Title of the new resource to create
+     * @param description Description of the new resource to create
+     * @param url Url of the existing file. This url should be accessible without authentication
+     * @param datagouv_apiKey API key to publish data on the datagouv instance
+     * @returns Created resource as Promise<DatagouvResourceCustom>
+     */
+    static createResourceRemote(baseUrl: string, datasetId: string, title:string, description:string, url:string, datagouv_apiKey: string): Promise<DatagouvResourceCustom> {
 
         const payload = {
                 "description": description,
@@ -44,7 +59,7 @@ export class Datagouv {
      * Update a Datagouv resource
      * @param resource Resource to update 
      * @param payload Fields to update. Some of {description?, title?, url?}
-     * @returns Datagouv response
+     * @returns Updated resource as Promise<DatagouvResourceCustom>
      */
     static updateResource(resource: DatagouvResourceCustom, api_base_url:string, dataset_id:string, datagouv_apiKey: string, payload: {description?: string, title?: string, url?: string}): Promise<DatagouvResourceCustom>{
 
@@ -68,7 +83,14 @@ export class Datagouv {
 
 
 
-
+    /**
+     * Create resource
+     * @param filePath Local path of the file to upload
+     * @param datagouvBaseUrl Base url of datagouv instance
+     * @param datasetId Id of dataset to inspect
+     * @param datagouv_apiKey API key to publish data on the datagouv instance
+     * @returns Created resource as Promise<DatagouvResourceCustom>
+     */
     static createResourceFromFile(filePath: string, datagouvBaseUrl: string, datasetId: string, datagouv_apiKey: string): Promise<DatagouvResourceCustom> {
 
         let log_:boolean = false ;
@@ -121,8 +143,8 @@ export class Datagouv {
 
     /**
      * Delete datagouv resource
-     * @param resource_id 
-     * @returns 
+     * @param resource_id Id of resource to delete
+     * @returns Empty string if deletion is successful
      */
     static deleteResource(resource_id: string, datagouvBaseUrl: string, dataset_id: string, datagouv_apiKey: string){
         const log_:boolean = false;
@@ -147,15 +169,6 @@ export class Datagouv {
             console.log("Resource deletion failed for "+resource_id+" : "+JSON.stringify({status: r.response.status, message: r.response.data.message}));
             throw new Error("Resource deletion failed");
         })
-    }
-
-    static test(resource_id: string, datagouvBaseUrl: string, dataset_id: string, datagouv_apiKey: string) {
-        return this.deleteResource(resource_id, datagouvBaseUrl, dataset_id, datagouv_apiKey);
-    }
-
-    static sayHello() {
-        console.log("hello 77");
-        
     }
 
 }
