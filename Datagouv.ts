@@ -171,6 +171,50 @@ export class Datagouv {
         })
     }
 
+
+    /**
+     * Get all matching resource of dataset whose title match param "pattern"
+     * @param dataset_id ID of dataset
+     * @param api_base_url API base url
+     * @param pattern Pattern of "title" of resources to match before deletion
+     * @param verbose Verbose mode
+     * @returns Array of DatagouvResourceCustom whose "title" match "pattern"
+     */
+    static async getMatchingResources(dataset_id:string, api_base_url: string, pattern: string, verbose: boolean): Promise<DatagouvResourceCustom[]>{
+        let dataset = await this.getDatasetMetadata(api_base_url, dataset_id);
+
+        let matchingResources: DatagouvResourceCustom[] = dataset.resources
+            .filter((resource: DatagouvResourceCustom) => RegExp(pattern).test(resource.title));
+
+        if (verbose) console.log("[getMatchingResources] Matching resources for "+dataset_id+ " and "+pattern+" "+JSON.stringify(matchingResources.map((resource: DatagouvResourceCustom) => ({id: resource.id, title: resource.title}))));
+
+        return matchingResources;
+    }
+
+
+    /**
+     * Delete all resource whose title matche pattern in a dataset
+     * @param dataset_id ID of the dataset
+     * @param api_base_url Base URL od datagouv
+     * @param api_key API key
+     * @param pattern Pattern of "title" of resources to match before deletion
+     * @param confirmDelete Boolean to tell if should delete. Useful for dry runs
+     * @param verbose Verbose mode
+     * @returns Resources that were deleted, and do not exist anymore on datagouv
+     */
+    static async deleteResourceDatasetPattern(dataset_id:string, api_base_url: string, api_key:string, pattern: string, confirmDelete: boolean, verbose: boolean): Promise<DatagouvResourceCustom[]> {
+        
+        let matchingResources: DatagouvResourceCustom[] = await this.getMatchingResources(dataset_id, api_base_url, pattern, verbose);
+
+
+        for (let resource of matchingResources) {
+            if(confirmDelete) await this.deleteResource(resource.id, api_base_url, dataset_id, api_key)
+            if (verbose) console.log("[deleteResourceDatasetPattern] Resource deleted : "+resource.title);
+        }
+
+        return matchingResources;
+    }
+
 }
 
 export type DatagouvResourceCustom = {
